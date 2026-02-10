@@ -38,6 +38,7 @@
         align-items: center;
         justify-content: center;
         text-align: center;
+        padding: 20px;
     }
 
     h1 {
@@ -48,6 +49,12 @@
     img {
         max-width: 300px;
         margin: 20px 0;
+        border-radius: 15px;
+    }
+
+    .yesScreen img {
+        max-width: 400px; /* większe zdjęcie w ekranie „Tak” */
+        margin-top: 20px;
     }
 
     button {
@@ -81,15 +88,25 @@
         font-size: 60px;
         margin-top: 20px;
     }
+
+    /* Wycentrowanie zdjęcia w ekranie „Tak” */
+    #yesScreen {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
 </style>
 </head>
 
 <body>
 
+<!-- EKRAN PYTANIA -->
 <div class="container" id="main">
     <h1>Czy będziesz moją walentynką?</h1>
 
-    <!-- TU WSTAW GIF -->
+    <!-- GIF -->
     <img src="https://tenor.com/pl/view/friday-gif-18743985.gif" alt="gif">
 
     <div id="buttons">
@@ -109,13 +126,17 @@
     </div>
 </div>
 
-<div class="container hidden" id="yesScreen">
+<!-- EKRAN „TAK” -->
+<div class="container hidden yesScreen" id="yesScreen">
     <h1>
         To znaczy, że mamy zaplanowany wspólny weekend.<br>
         Spędzimy go razem w Gdańsku.<br>
         Kocham cię ❤️<br><br>
         A reszta… będzie małą niespodzianką.
     </h1>
+
+    <!-- ZDJĘCIE POD TEKSTEM -->
+    <img src="1.jpeg" alt="zdjęcie">
 </div>
 
 <script>
@@ -125,15 +146,15 @@
         heart.classList.add("heart");
         heart.innerHTML = "💗";
         heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+        heart.style.animationDuration = (3 + Math.random() * 3) + "s"; // zmień liczby dla szybszych/wolniejszych serc
         document.body.appendChild(heart);
 
         setTimeout(() => heart.remove(), 15000);
     }
 
-    setInterval(createHeart, 400);
+    setInterval(createHeart, 400); // zmień 400 dla większej/mniejszej ilości serc
 
-    /* ===== LOGIKA ===== */
+    /* ===== LOGIKA PRZYCISKÓW ===== */
     function noClicked() {
         document.getElementById("confirmNo").classList.remove("hidden");
         document.getElementById("yesBtn").disabled = true; // blokada "Tak"
