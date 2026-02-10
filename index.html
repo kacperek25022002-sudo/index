@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Walentynka 💖</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: white;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+    }
+
+    /* ===== SERDUSZKA ===== */
+    .heart {
+        position: fixed;
+        top: -50px;
+        font-size: 130px; /* 5x większe */
+        opacity: 0.7;
+        animation: fall linear infinite;
+        pointer-events: none;
+    }
+
+    @keyframes fall {
+        from { transform: translateY(0); }
+        to { transform: translateY(120vh); }
+    }
+
+    /* ===== CONTENT ===== */
+    .container {
+        position: relative;
+        z-index: 2;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    h1 {
+        color: black;
+        margin-bottom: 20px;
+    }
+
+    img {
+        max-width: 300px;
+        margin: 20px 0;
+    }
+
+    button {
+        padding: 14px 30px;
+        margin: 10px;
+        font-size: 18px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+
+    button:hover {
+        transform: scale(1.1);
+    }
+
+    .yes {
+        background: pink;
+        color: white;
+    }
+
+    .no {
+        background: lightgray;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .sad {
+        font-size: 60px;
+        margin-top: 20px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container" id="main">
+    <h1>Czy będziesz moją walentynką?</h1>
+
+    <!-- TU WSTAW GIF -->
+    <img src="https://tenor.com/pl/view/friday-gif-18743985.gif" alt="gif">
+
+    <div id="buttons">
+        <button class="yes" id="yesBtn" onclick="yesClicked()">Tak</button>
+        <button class="no" onclick="noClicked()">Nie</button>
+    </div>
+
+    <!-- POTWIERDZENIE NIE -->
+    <div id="confirmNo" class="hidden">
+        <p>Czy jesteś pewna tego?</p>
+        <button class="no" onclick="confirmNo()">Tak, jestem pewna</button>
+    </div>
+
+    <!-- SMUTNA MINKA -->
+    <div id="sadFace" class="hidden">
+        <div class="sad">😢</div>
+    </div>
+</div>
+
+<div class="container hidden" id="yesScreen">
+    <h1>
+        To znaczy, że mamy zaplanowany wspólny weekend.<br>
+        Spędzimy go razem w Gdańsku.<br>
+        Kocham cię ❤️<br><br>
+        A reszta… będzie małą niespodzianką.
+    </h1>
+</div>
+
+<script>
+    /* ===== SERDUSZKA ===== */
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "💗";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 15000);
+    }
+
+    setInterval(createHeart, 400);
+
+    /* ===== LOGIKA ===== */
+    function noClicked() {
+        document.getElementById("confirmNo").classList.remove("hidden");
+        document.getElementById("yesBtn").disabled = true; // blokada "Tak"
+        document.getElementById("yesBtn").style.opacity = "0.5";
+    }
+
+    function confirmNo() {
+        document.getElementById("confirmNo").classList.add("hidden");
+        document.getElementById("sadFace").classList.remove("hidden");
+    }
+
+    function yesClicked() {
+        document.getElementById("main").classList.add("hidden");
+        document.getElementById("yesScreen").classList.remove("hidden");
+    }
+</script>
+
+</body>
+</html>
